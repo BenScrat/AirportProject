@@ -1,2 +1,7 @@
-package com.example.airportproject.dal;public interface Passager {
+package com.example.airportproject.dal;
+
+import com.example.airportproject.bo.Passager;
+import org.springframework.data.repository.CrudRepository;
+
+public interface PassagerDAO extends CrudRepository<Passager, Integer> {
 }
