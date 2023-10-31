@@ -36,11 +36,15 @@ public class AvionManagerImpl implements AvionManager {
         return (List<Avion>) avionDAO.findAll();
     }
 
-    @Override
-    public List<Passager> getAllPassagerofAvion(Avion avion) {
-        return null;
-    }
+//    @Override
+//    public List<Passager> getAllPassagerofAvion(Avion avion) {
+//        return avion.getPassagers();
+//    }
 
+    @Override
+    public List<Passager> findByAvion(Avion avion) {
+        return avion.getPassagers();
+    }
     @Override
     @Transactional
     public List<Passager> getAllPassager() {

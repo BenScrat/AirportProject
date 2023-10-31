@@ -16,7 +16,6 @@ public class Avion {
     @GeneratedValue
     private Integer id;
 
-
     private String constructeur;
     private String model;
     private String code;

@@ -18,7 +18,7 @@ public class HomeController {
     AvionManager avionManager;
 
 
-    @GetMapping("/home")
+    @GetMapping("/")
     public String home(Model model) {
         List<Avion> avions = avionManager.getAllAvions();
         model.addAttribute("avions", avions);
@@ -28,7 +28,23 @@ public class HomeController {
     }
 
     @GetMapping("/embarquer")
-    public String embarquer(){
-        return "redirect:/pasla";
+    public String embarquer( Model model) {
+        //je souhaite faire embarqué un passager dans un avion
+        List<Passager> passagers = avionManager.getAllPassager();
+        for (Passager p : passagers) {
+            avionManager.embarquer(p, p.getAvion());
+        }
+        model.addAttribute("passagers", passagers);
+        return "redirect:/";
+    }
+    @GetMapping("/debarquer")
+    public String debarquer( Model model) {
+        //je souhaite debarquer tous les passagers
+        List<Passager> passagers = avionManager.getAllPassager();
+        for (Passager p : passagers) {
+            avionManager.debarquer(p);
+        }
+        model.addAttribute("passagers", passagers);
+        return "redirect:/";
     }
 }

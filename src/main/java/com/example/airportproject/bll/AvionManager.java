@@ -12,7 +12,9 @@ public interface AvionManager {
     public void addPassager( Passager passager);
 
     public List<Avion> getAllAvions();
-    public List<Passager> getAllPassagerofAvion(Avion avion);
+//    public List<Passager> getAllPassagerofAvion(Avion avion);
+
+    List<Passager> findByAvion(Avion avion);
 
     public List<Passager> getAllPassager();
 
