@@ -1,0 +1,34 @@
+package com.example.airportproject.ws;
+
+import com.example.airportproject.bo.Avion;
+import com.example.airportproject.bo.Passager;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class AvionDTO {
+    private String code;
+    private List<PassagerDTO> lstPassagers = new ArrayList<PassagerDTO>();
+
+    public AvionDTO(Avion avion) {
+        this.code = avion.getCode();
+        for(Passager passager : avion.getLstPassagers()) {
+            this.lstPassagers.add(new PassagerDTO(passager));
+        }
+    }
+
+    public Avion toBO() {
+        Avion avion = new Avion();
+        avion.setCode(code);
+        for(PassagerDTO passager : this.lstPassagers) {
+            avion.addPassager(passager.toBO()); // ici la double dépendance est gérée
+        }
+        return avion;
+    }
+}

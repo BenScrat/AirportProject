@@ -24,4 +24,5 @@ public interface AvionManager {
     public void embarquer(Passager p, Avion a);
 
 
+    public void decolage(String code, String aeroport);
 }

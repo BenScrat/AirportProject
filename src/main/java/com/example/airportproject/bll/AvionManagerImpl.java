@@ -7,6 +7,7 @@ import com.example.airportproject.dal.PassagerDAO;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -58,6 +59,14 @@ public class AvionManagerImpl implements AvionManager {
     public void embarquer(Passager p, Avion a){
         a.addPassager(p);
         avionDAO.save(a);
+    }
+
+    @Override
+    public void decolage(String code, String aeroport) {
+        Avion avion = avionDAO.findByCode(code);
+        String url = "http://" + aeroport + "/";
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.postForEntity(url, avion, Avion.class);
     }
 
 }

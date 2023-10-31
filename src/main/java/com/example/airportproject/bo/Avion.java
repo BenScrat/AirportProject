@@ -1,5 +1,7 @@
 package com.example.airportproject.bo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,10 +13,12 @@ import java.util.List;
 @Data
 @Entity
 @NoArgsConstructor
+@JsonView(AvionViews.Normal.class)
 public class Avion {
 
     @Id
     @GeneratedValue
+    @JsonIgnore
     private Integer id;
 
     private String constructeur;
@@ -39,5 +43,9 @@ public class Avion {
     public void removePassager(Passager p) {
         passagers.remove(p);
         p.setAvion(null);
+    }
+
+    public Passager[] getLstPassagers() {
+        return passagers.toArray(new Passager[0]);
     }
 }
