@@ -22,9 +22,11 @@
         <td><span data-th-text="${item.model}"></span></td>
         <td><span data-th-text="${item.code}"></span></td>
          <td>
-             <button type="button"  class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
-             <a th:href="@{/debarquer}" >débarquer</a>
-         </button>
+             <span th:if="${item.getPassagers().size() > 0}">
+                 <button type="button"  class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                     <a th:href="@{'/debarquer/'+${item.code}}">débarquer</a>
+                </button>
+             </span>
          </td>
     </tr>
     </tbody>
@@ -43,17 +45,44 @@
     </thead>
     <tbody>
     <tr data-th-each="item : ${passagers}">
-        <th><span data-th-text="${item.nom}"></span></th>
-        <td><span data-th-text="${item.prenom}"></span></td>
-        <td><span data-th-text="${item.age}"></span></td>
+        <span th:if="${item.getAvion() == null}">
+            <th><span data-th-text="${item.nom}"></span></th>
+            <td><span data-th-text="${item.prenom}"></span></td>
+            <td><span data-th-text="${item.age}"></span></td>
         <td>
+            <span data-th-each="avion : ${avions}">
             <button type="button"class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
-                <a th:href="@{/embarquer}" >embarquer</a>
+<!--                <a th:href="@{/embarquer}" data-th-text="${avion.code}"></a>-->
+
+                <a th:href="@{'/embarquer/'+${item.nom}+'/'+${item.prenom}+'/'+${avion.code}}" data-th-text="${avion.getCode()}"></a>
             </button>
+                 </span>
+            </span>
         </td>
     </tr>
     </tbody>
 </table>
+
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr>
+            <th>Code</th>
+            <th>nom</th>
+            <th>prenom</th>
+            <th>age</th>
+        </tr>
+        </thead>
+        <tbody>
+        <span data-th-each="item : ${avions}">
+        <tr data-th-each="passager: ${item.getPassagers()}">
+            <th><span data-th-text="${item.code}"></span></th>
+            <td><span data-th-text="${passager.getNom()}"></span></td>
+            <td><span data-th-text="${passager.getPrenom()}"></span></td>
+            <td><span data-th-text="${passager.getAge()}"></span></td>
+        </tr>
+            </span>
+        </tbody>
+    </table>
 </div>
 </body>
 </html>

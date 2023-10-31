@@ -3,10 +3,12 @@ package com.example.airportproject.controller;
 import com.example.airportproject.bll.AvionManager;
 import com.example.airportproject.bo.Avion;
 import com.example.airportproject.bo.Passager;
+import com.example.airportproject.dal.AvionDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -16,6 +18,8 @@ import java.util.List;
 public class HomeController {
     @Autowired
     AvionManager avionManager;
+    @Autowired
+    AvionDAO avionDAO;
 
 
     @GetMapping("/")
@@ -27,22 +31,25 @@ public class HomeController {
         return "Avion/Home";
     }
 
-    @GetMapping("/embarquer")
-    public String embarquer( Model model) {
-        //je souhaite faire embarqué un passager dans un avion
+    @RequestMapping("/embarquer/{passagerNom}/{passagerPrenom}/{avionCode}")
+    public String ajoutPassagerDansAvion(@PathVariable("passagerNom") String passagerNom, @PathVariable("passagerPrenom") String passagerPrenom, @PathVariable("avionCode") String avionCode, Model model) {
         List<Passager> passagers = avionManager.getAllPassager();
         for (Passager p : passagers) {
-            avionManager.embarquer(p, p.getAvion());
+            if (p.getNom().equals(passagerNom) && p.getPrenom().equals(passagerPrenom)) {
+                avionManager.embarquer(p, avionDAO.findByCode(avionCode));
+            }
         }
         model.addAttribute("passagers", passagers);
         return "redirect:/";
     }
-    @GetMapping("/debarquer")
-    public String debarquer( Model model) {
-        //je souhaite debarquer tous les passagers
+
+
+    @RequestMapping("/debarquer/{avionCode}")
+    public String debarquer(@PathVariable("avionCode") String avionCode, Model model) {
+            //je souhaite debarquer le passager de l'avion avec la methode debarquer de l'AvionManager
         List<Passager> passagers = avionManager.getAllPassager();
         for (Passager p : passagers) {
-            avionManager.debarquer(p);
+            avionManager.debarquer(avionDAO.findByCode(avionCode));
         }
         model.addAttribute("passagers", passagers);
         return "redirect:/";

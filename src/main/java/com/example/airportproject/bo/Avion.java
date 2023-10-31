@@ -3,6 +3,7 @@ package com.example.airportproject.bo;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,7 @@ public class Avion {
     private String code;
 
     @OneToMany(mappedBy = "avion")
+    @ToString.Exclude
     private List<Passager> passagers = new ArrayList<>();
 
     public Avion(String constructeur, String model, String code) {

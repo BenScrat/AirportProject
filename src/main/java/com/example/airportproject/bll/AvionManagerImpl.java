@@ -36,15 +36,6 @@ public class AvionManagerImpl implements AvionManager {
         return (List<Avion>) avionDAO.findAll();
     }
 
-//    @Override
-//    public List<Passager> getAllPassagerofAvion(Avion avion) {
-//        return avion.getPassagers();
-//    }
-
-    @Override
-    public List<Passager> findByAvion(Avion avion) {
-        return avion.getPassagers();
-    }
     @Override
     @Transactional
     public List<Passager> getAllPassager() {
@@ -54,9 +45,12 @@ public class AvionManagerImpl implements AvionManager {
 
     @Override
     @Transactional
-    public void debarquer(Passager p) {
-        p.getAvion().removePassager(p);
-        avionDAO.save(p.getAvion());
+    public void debarquer(Avion a) {
+        //je souhaite vider la liste des passagers de l'avion
+        List<Passager> passagers = a.getPassagers();
+        for (Passager p : passagers) {
+            p.setAvion(null);
+        }
     }
 
     @Override
