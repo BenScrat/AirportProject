@@ -25,4 +25,6 @@ public interface AvionManager {
 
 
     public void decolage(String code, String aeroport);
+
+    Avion ajouterAvion(Avion bo);
 }

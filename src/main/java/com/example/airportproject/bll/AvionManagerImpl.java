@@ -4,6 +4,7 @@ import com.example.airportproject.bo.Avion;
 import com.example.airportproject.bo.Passager;
 import com.example.airportproject.dal.AvionDAO;
 import com.example.airportproject.dal.PassagerDAO;
+import com.example.airportproject.ws.AvionDTO;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -61,12 +62,38 @@ public class AvionManagerImpl implements AvionManager {
         avionDAO.save(a);
     }
 
-    @Override
+    /*@Override
     public void decolage(String code, String aeroport) {
         Avion avion = avionDAO.findByCode(code);
-        String url = "http://" + aeroport + "/";
+        String url = "http://" + aeroport + "/ws/aeroport";
+*//*        String url = "http://" + aeroport + "/aeroport/ws/";*//*
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.postForEntity(url, avion, Avion.class);
+
+
+    }*/
+
+    public void decolage(String code, String aeroport) {
+        Avion avion = avionDAO.findByCode(code);
+        AvionDTO avionDTO = new AvionDTO(avion);
+
+        String url = "http://" + aeroport + "/ws/aeroport";
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.postForEntity(url, avionDTO, AvionDTO.class);
+        List<Passager> passagers = avion.getPassagers();
+        for (Passager p : passagers) {
+            p.setAvion(null);
+            passagerDAO.save(p);
+        }
+        avion.getPassagers().clear();
+
+        avionDAO.delete(avion);
+
+    }
+
+    @Override
+    public Avion ajouterAvion(Avion bo) {
+        return avionDAO.save(bo);
     }
 
 }

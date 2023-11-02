@@ -17,7 +17,7 @@ import java.util.List;
 public class Avion {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonIgnore
     private Integer id;
 
@@ -27,6 +27,7 @@ public class Avion {
 
     @OneToMany(mappedBy = "avion")
     @ToString.Exclude
+    @JsonView(AvionViews.Extended.class)
     private List<Passager> passagers = new ArrayList<>();
 
     public Avion(String constructeur, String model, String code) {

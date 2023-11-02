@@ -10,18 +10,21 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PassagerDTO {
 
-    private String lastname;
-    private String firstname;
+    private String nom;
+    private String prenom;
+    private int age;
 
     public PassagerDTO(Passager passager) {
-        this.lastname = passager.getNom();
-        this.firstname = passager.getPrenom();
+        this.nom = passager.getNom();
+        this.prenom = passager.getPrenom();
+        this.age = passager.getAge();
     }
 
     public Passager toBO() {
         Passager passager = new Passager();
-        passager.setNom(lastname);
-        passager.setPrenom(firstname);
+        passager.setNom(nom);
+        passager.setPrenom(prenom);
+        passager.setAge(age);
         return passager;
     }
 

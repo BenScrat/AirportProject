@@ -1,7 +1,9 @@
 package com.example.airportproject.ws;
 
 import com.example.airportproject.bo.Avion;
+import com.example.airportproject.bo.AvionViews;
 import com.example.airportproject.bo.Passager;
+import com.fasterxml.jackson.annotation.JsonView;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,10 +16,16 @@ import java.util.List;
 @AllArgsConstructor
 public class AvionDTO {
     private String code;
+    private String constructeur;
+
+    private String model;
+    @JsonView(AvionViews.Extended.class)
     private List<PassagerDTO> lstPassagers = new ArrayList<PassagerDTO>();
 
     public AvionDTO(Avion avion) {
         this.code = avion.getCode();
+        this.constructeur = avion.getConstructeur();
+        this.model = avion.getModel();
         for(Passager passager : avion.getLstPassagers()) {
             this.lstPassagers.add(new PassagerDTO(passager));
         }
