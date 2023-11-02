@@ -1,8 +1,10 @@
 package com.example.airportproject;
 
 import com.example.airportproject.bll.AvionManager;
+import com.example.airportproject.bll.UserManager;
 import com.example.airportproject.bo.Avion;
 import com.example.airportproject.bo.Passager;
+import com.example.airportproject.bo.User;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -13,6 +15,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class AirportProjectApplication implements CommandLineRunner {
     @Autowired
     AvionManager avionManager;
+
+    @Autowired
+    UserManager userManager;
 
     public static void main(String[] args) {
         SpringApplication.run(AirportProjectApplication.class, args);
@@ -41,6 +46,8 @@ public class AirportProjectApplication implements CommandLineRunner {
         Passager passager8 = new Passager("Doe", "Tom", 65);
         Passager passager9 = new Passager("Doe", "Killian", 75);
 
+        User user = new User("bob", "bob", true);
+
 
         avionManager.addAvion(Airbus330);
         avionManager.addAvion(Airbus380);
@@ -58,6 +65,8 @@ public class AirportProjectApplication implements CommandLineRunner {
         avionManager.addPassager(passager7);
         avionManager.addPassager(passager8);
         avionManager.addPassager(passager9);
+
+        userManager.addUser(user);
 
     }
 }

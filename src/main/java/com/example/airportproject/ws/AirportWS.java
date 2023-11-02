@@ -3,7 +3,6 @@ package com.example.airportproject.ws;
 import com.example.airportproject.bll.AvionManager;
 import com.example.airportproject.bo.Avion;
 import com.example.airportproject.bo.AvionViews;
-import com.example.airportproject.dal.AvionDAO;
 import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
