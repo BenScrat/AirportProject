@@ -7,9 +7,7 @@ import com.example.airportproject.dal.AvionDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,6 +27,13 @@ public class HomeController {
         List<Passager> passagers = avionManager.getAllPassager();
         model.addAttribute("passagers", passagers);
         return "Avion/Home";
+    }
+
+    @PostMapping("/add")
+    public String Add(@ModelAttribute("avions") Avion avion) {
+        avionManager.addAvion(avion);
+        System.out.println("L'avion" + avion + " a bien été ajouté");
+        return "redirect:/";
     }
 
     @RequestMapping("/embarquer/{passagerNom}/{passagerPrenom}/{avionCode}")

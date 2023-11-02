@@ -14,6 +14,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonView(AvionViews.Normal.class)
 public class AvionDTO {
     private String code;
     private String constructeur;
