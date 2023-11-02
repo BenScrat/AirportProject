@@ -34,6 +34,8 @@ public class AvionDTO {
     public Avion toBO() {
         Avion avion = new Avion();
         avion.setCode(code);
+        avion.setConstructeur(constructeur);
+        avion.setModel(model);
         for(PassagerDTO passager : this.lstPassagers) {
             avion.addPassager(passager.toBO()); // ici la double dépendance est gérée
         }

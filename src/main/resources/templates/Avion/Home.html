@@ -11,8 +11,15 @@
     #voyagers tr:nth-child(even){background-color: #f2f2f2;}
 </style>
 <div class="dashboard max-w-7xl mx-auto">
+
     <div class="mb-8 mt-20">
-        <h3 class="bold text text-2xl font-semibold text-center">Liste avions</h3>
+        <div class="dashboard-cta">
+            <div class="dashboard-top flex items-center justify-between w-full">
+                <h3 class="bold text text-2xl font-semibold text-center">Liste avions</h3>
+                <button type="button" class="dashboard-btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Créer un avion</button>
+            </div>
+        </div>
+
         <table id="customers" class="w-full text-sm text-left text-gray-500 dark:text-gray-400  rounded-md  shadow-md bg-white mt-6">
             <thead class="text-xs text-gray-700 uppercase dark:text-gray-400 p-4">
             <tr>
