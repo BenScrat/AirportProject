@@ -21,23 +21,33 @@ public class AirportProjectApplication implements CommandLineRunner {
     @Override
     @Transactional
     public void run(String... args) throws Exception {
-       /* Avion Airbus = new Avion("Airbus", "A380", "A388");
-        Avion Boeing = new Avion("Boeing", "777", "777X");
+        Avion Airbus380 = new Avion("Airbus", "A380", "A380");
+        Avion Airbus330 = new Avion("Airbus", "A330", "A330");
+        Avion Airbus300 = new Avion("Airbus", "A300", "A300");
+        Avion Boeing777 = new Avion("Boeing", "777", "777X");
+        Avion Boeing737 = new Avion("Boeing", "737", "737");
+
+        /*Avion Airbus = new Avion("Airbus", "A380", "A388");
+        Avion Boeing = new Avion("Boeing", "777", "777X");*/
 
 
-        Passager passager = new Passager("John", "Doe", 25);
+        Passager passager = new Passager("John", "Doe", 45);
         Passager passager2 = new Passager("Haliday", "Bob", 35);
         Passager passager3 = new Passager("Week", "John", 55);
-        Passager passager4 = new Passager("Dupont", "Tom", 15);
-        Passager passager5 = new Passager("Albert", "paul", 15);
-        Passager passager6 = new Passager("Vannier", "Benjamin", 15);
+        Passager passager4 = new Passager("Dupont", "Tom", 80);
+        Passager passager5 = new Passager("Albert", "paul", 18);
+        Passager passager6 = new Passager("Vannier", "Benjamin", 35);
         Passager passager7 = new Passager("Malabry", "Emmanuel", 15);
-        Passager passager8 = new Passager("Doe", "Tom", 15);
-        Passager passager9 = new Passager("Doe", "Killian", 15);
+        Passager passager8 = new Passager("Doe", "Tom", 65);
+        Passager passager9 = new Passager("Doe", "Killian", 75);
 
 
-        avionManager.addAvion(Airbus);
-        avionManager.addAvion(Boeing);
+        avionManager.addAvion(Airbus330);
+        avionManager.addAvion(Airbus380);
+        avionManager.addAvion(Airbus300);
+        avionManager.addAvion(Boeing777);
+        avionManager.addAvion(Boeing737);
+
 
         avionManager.addPassager(passager);
         avionManager.addPassager(passager2);
@@ -47,7 +57,7 @@ public class AirportProjectApplication implements CommandLineRunner {
         avionManager.addPassager(passager6);
         avionManager.addPassager(passager7);
         avionManager.addPassager(passager8);
-        avionManager.addPassager(passager9);*/
+        avionManager.addPassager(passager9);
 
     }
 }
